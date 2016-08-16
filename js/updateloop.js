@@ -4,6 +4,8 @@ Chicken.register(
 function (requestFrame, now) {
     "use strict";
 
+    var FPS_WINDOW_SIZE = 10;
+
     var UpdateLoop = Chicken.Class(function UpdateLoop(onupdate) {
         if (!onupdate) throw new Error("No update function specified");
 
@@ -14,6 +16,12 @@ function (requestFrame, now) {
             var time = now();
             var dt = (time - updateloop._lastFrameTime) / 1000;
             updateloop._lastFrameTime = time;
+
+            var buf = updateloop._fpsBuffer;
+            buf.push(dt);
+            if (buf.length === FPS_WINDOW_SIZE) {
+                buf.shift();
+            }
 
             if (!updateloop._paused) {
                 // Call the registered update handler
@@ -27,6 +35,7 @@ function (requestFrame, now) {
         this._lastTime = 0;
         this._updateWrapper = _updateWrapper;
         this._onupdate = onupdate;
+        this._fpsBuffer = [];
     }, {
         step: function UpdateLoop_step(dt) {
             this._onupdate(dt);
@@ -46,6 +55,19 @@ function (requestFrame, now) {
                 }
 
                 return value;
+            },
+            enumerable: true
+        },
+        fps: {
+            get: function UpdateLopp_get_Fps() {
+                var totalTime = 0;
+                var buf = this._fpsBuffer;
+                for (var i = 0; i < buf.length; i++)
+                    totalTime += buf[i];
+
+                if (buf === 0) return 0;
+
+                return buf.length / totalTime;
             },
             enumerable: true
         }

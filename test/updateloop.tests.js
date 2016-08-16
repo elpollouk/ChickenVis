@@ -2,13 +2,14 @@
 "use strict";
 
 var frameCallback;
-var time = 0;
+var time;
+var dt;
 var mocks = {
     "ChickenVis.requestAnimationFrame": function (callback) {
         frameCallback = callback;
     },
     "Date.now": function () {
-        return time += 33;
+        return time += dt;
     }
 };
 
@@ -24,6 +25,8 @@ var UpdateLoop = Chicken.fetch("ChickenVis.UpdateLoop", mocks);
 window.Tests.UpdateLoopTests = {
     beforeTest: function () {
         frameCallback = null;
+        time = 0;
+        dt = 33;
     },
 
     construct: function () {
@@ -93,6 +96,34 @@ window.Tests.UpdateLoopTests = {
 
         Assert.isSame(1, onupdate.calls.length);
         Assert.isNull(frameCallback);
+    },
+
+    fps_static: function () {
+        dt = 40;
+        var onupdate = Test.mockFunction();
+        var updater = new UpdateLoop(onupdate);
+        updater.paused = false;
+
+        for (var i = 0; i < 15; i++) {
+            nextFrame();
+            Test.log(`FPS ${i} = ${updater.fps}`);
+            Assert.isTrue(24.5 < updater.fps && updater.fps < 25.5);
+        }
+    },
+
+    fps_variable: function () {
+        dt = 10;
+        var onupdate = Test.mockFunction();
+        var updater = new UpdateLoop(onupdate);
+        updater.paused = false;
+
+        for (var i = 0; i < 15; i++) {
+            nextFrame();
+            dt += 5;
+        }
+
+        Test.log(`FPS ${updater.fps}`);
+        Assert.isTrue(16.5 < updater.fps && updater.fps < 17.5);
     }
 };
 

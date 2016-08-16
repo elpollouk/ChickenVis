@@ -1,6 +1,6 @@
 {
     "title": "ChickenVis",
-    "version": "0.1.0",
+    "version": "0.1.0-dev",
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "minify": {
         "type": "uglifyjs",
@@ -18,6 +18,9 @@
         },
         {
             "path": "js/draw.js"
+        },
+        {
+            "path": "js/fixeddeltaupdater.js"
         }
     ]
 }
