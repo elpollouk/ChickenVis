@@ -2,7 +2,7 @@ Chicken.register("ChickenVis.Loader", ["ChickenVis.createElement"], function (cr
 
     var typeLoaders = {};
 
-    var Loader = Chicken.Class(function Loader_ctor() {
+    var Loader = Chicken.Class(function Loader() {
         this.numReady = 0;
         this.numTotal = 0;
         this.failed = [];

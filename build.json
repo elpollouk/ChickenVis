@@ -2,7 +2,13 @@
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "input": [
         {
+            "path": "js/utils.js"
+        },
+        {
             "path": "js/loader.js"
+        },
+        {
+            "path": "js/updateloop.js"
         }
     ]
 }
