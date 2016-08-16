@@ -1,4 +1,6 @@
 {
+    "title": "ChickenVis",
+    "version": "0.1.0",
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "input": [
         {
@@ -9,6 +11,9 @@
         },
         {
             "path": "js/updateloop.js"
+        },
+        {
+            "path": "js/draw.js"
         }
     ]
 }

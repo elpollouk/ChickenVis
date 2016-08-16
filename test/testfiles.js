@@ -10,5 +10,6 @@
 	Test.addScripts("../js/utils.js");
 	Test.addScripts("../js/loader.js",					"loader.tests.js");
 	Test.addScripts("../js/updateloop.js",				"updateloop.tests.js");
+	Test.addScripts("../js/draw.js",					"draw.tests.js");
 
 })();
