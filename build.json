@@ -4,7 +4,7 @@
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "minify": {
         "type": "uglifyjs",
-        "options": ["-c", "-m"]
+        "options": ["-c", "-m", "--mangle-props", "--mangle-regex=\"/^_/\""]
     },
     "input": [
         {
