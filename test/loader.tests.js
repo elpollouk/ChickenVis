@@ -113,7 +113,100 @@ window.Tests.LoaderTests = {
         Assert.isSame(4, onStateChange.calls.length, "Wrong number of state change callbacks");
         Assert.isSame(1, onStateChange.calls[3][0].id);
         Assert.isSame(loader, onStateChange.calls[3][1]);
-    }
+    },
+
+    getInfo: function () {
+        var loader = new Loader();
+        var onStateChange = Test.mockFunction();
+        var items = [
+            { id: 0, source: "A", type: Loader.TYPE_IMAGE },
+            { id: 1, source: "B", type: Loader.TYPE_IMAGE }
+        ];
+
+        loader.queue(items, onStateChange);
+
+        var asset = loader.getInfo(0);
+        Assert.isNotNullOrUndefined(asset);
+        Assert.isSame(0, asset.id);
+        Assert.isSame("A", asset.source);
+        Assert.isSame(Loader.TYPE_IMAGE, asset.type);
+        Assert.isSame(Loader.STATE_QUEUED, asset.state);
+
+        asset = loader.getInfo(1);
+        Assert.isNotNullOrUndefined(asset);
+        Assert.isSame(1, asset.id);
+        Assert.isSame("B", asset.source);
+        Assert.isSame(Loader.TYPE_IMAGE, asset.type);
+        Assert.isSame(Loader.STATE_QUEUED, asset.state);
+
+        createdElements[0].onload();
+        asset = loader.getInfo(0);
+        Assert.isNotNullOrUndefined(asset);
+        Assert.isSame(0, asset.id);
+        Assert.isSame("A", asset.source);
+        Assert.isSame(Loader.TYPE_IMAGE, asset.type);
+        Assert.isSame(Loader.STATE_READY, asset.state);
+
+        createdElements[1].onerror();
+        asset = loader.getInfo(1);
+        Assert.isNotNullOrUndefined(asset);
+        Assert.isSame(1, asset.id);
+        Assert.isSame("B", asset.source);
+        Assert.isSame(Loader.TYPE_IMAGE, asset.type);
+        Assert.isSame(Loader.STATE_ERROR, asset.state);
+    },
+
+    getInfo_notFound: function () {
+        var loader = new Loader();
+        var asset = loader.getInfo("not found");
+        Assert.isUndefined(asset);
+    },
+
+    getData_queued: function () {
+        var loader = new Loader();
+        var onStateChange = Test.mockFunction();
+        var items = [
+            { id: 0, source: "B", type: Loader.TYPE_IMAGE }
+        ];
+
+        loader.queue(items, onStateChange);
+        var data = loader.getData(0);
+        Assert.isNull(data);
+    },
+
+    getData_ready: function () {
+        var loader = new Loader();
+        var onStateChange = Test.mockFunction();
+        var items = [
+            { id: 0, source: "B", type: Loader.TYPE_IMAGE }
+        ];
+
+        loader.queue(items, onStateChange);
+        createdElements[0].onload();
+        var data = loader.getData(0);
+        Assert.isSame(createdElements[0], data);
+    },
+
+    getData_errored: function () {
+        var loader = new Loader();
+        var onStateChange = Test.mockFunction();
+        var items = [
+            { id: 0, source: "B", type: Loader.TYPE_IMAGE }
+        ];
+
+        loader.queue(items, onStateChange);
+        createdElements[0].onerror();
+        var data = loader.getData(0);
+        Assert.isNull(data);
+    },
+
+    getData_notFound: function () {
+        var loader = new Loader();
+
+        var data = loader.getData(0);
+        Assert.isUndefined(data);
+    },
+
 };
 
 })();

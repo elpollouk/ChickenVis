@@ -29,6 +29,18 @@ Chicken.register("ChickenVis.Loader", ["ChickenVis.createElement"], function (cr
                 asset.id = items[i].id;
                 loader._store[asset.id] = asset;
             }
+        },
+
+        getInfo: function Loader_getInfo(id) {
+            return this._store[id];
+        },
+
+        getData: function Loader_getData(id) {
+            var asset = this._store[id];
+            if (!asset) return;
+            if (asset.state !== Loader.STATE_READY) return null;
+
+            return asset.data;
         }
     }, {}, {
         TYPE_IMAGE : "img",
