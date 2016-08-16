@@ -84,23 +84,35 @@ window.Tests.LoaderTests = {
         Assert.isSame(1, loader.numReady, "numReady not set correctly");
         Assert.isSame(4, loader.numTotal, "numTotal not set correctly");
         Assert.isSame(0, loader.failed.length, "Wrong number of failed items");
+        Assert.isSame(1, onStateChange.calls.length, "Wrong number of state change callbacks");
+        Assert.isSame(0, onStateChange.calls[0][0].id);
+        Assert.isSame(loader, onStateChange.calls[0][1]);
 
         createdElements[2].onload();
         Assert.isSame(2, loader.numReady, "numReady not set correctly");
         Assert.isSame(4, loader.numTotal, "numTotal not set correctly");
         Assert.isSame(0, loader.failed.length, "Wrong number of failed items");
+        Assert.isSame(2, onStateChange.calls.length, "Wrong number of state change callbacks");
+        Assert.isSame(2, onStateChange.calls[1][0].id);
+        Assert.isSame(loader, onStateChange.calls[1][1]);
 
         createdElements[3].onerror();
         Assert.isSame(2, loader.numReady, "numReady not set correctly");
         Assert.isSame(4, loader.numTotal, "numTotal not set correctly");
         Assert.isSame(1, loader.failed.length, "Wrong number of failed items");
         Assert.isSame(3, loader.failed[0].id, "Wrong item logged as failed");
+        Assert.isSame(3, onStateChange.calls.length, "Wrong number of state change callbacks");
+        Assert.isSame(3, onStateChange.calls[2][0].id);
+        Assert.isSame(loader, onStateChange.calls[2][1]);
 
         createdElements[1].onload();
         Assert.isSame(3, loader.numReady, "numReady not set correctly");
         Assert.isSame(4, loader.numTotal, "numTotal not set correctly");
         Assert.isSame(1, loader.failed.length, "Wrong number of failed items");
         Assert.isSame(3, loader.failed[0].id, "Wrong item logged as failed");
+        Assert.isSame(4, onStateChange.calls.length, "Wrong number of state change callbacks");
+        Assert.isSame(1, onStateChange.calls[3][0].id);
+        Assert.isSame(loader, onStateChange.calls[3][1]);
     }
 };
 
