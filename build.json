@@ -2,6 +2,10 @@
     "title": "ChickenVis",
     "version": "0.1.0",
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
+    "minify": {
+        "type": "uglifyjs",
+        "options": ["-c", "-m"]
+    },
     "input": [
         {
             "path": "js/utils.js"
