@@ -93,6 +93,11 @@ Chicken.register("ChickenVis.Math", [], function () {
             return {x:v.x*scale, y:v.y*scale};
         },
 
+        scaleAdd2: function MathEx_scaleAdd2(v1, v2, scale) {
+            v1.x += (v2.x * scale);
+            v1.y += (v2.y * scale);
+        },
+
         slerp2: function MathEx_slerp2(v1, v2, alpha) {
             v1.x += (v2.x - v1.x) * alpha;
             v1.y += (v2.y - v1.y) * alpha;

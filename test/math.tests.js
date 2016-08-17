@@ -237,6 +237,16 @@
             Assert.isEqual(-3.5, v2.y);
         },
 
+        scaleAdd2: function () {
+            var v1 = MathEx.vector2(4, 12);
+            var v2 = MathEx.vector2(50, 30);
+            MathEx.scaleAdd2(v1, v2, 0.5);
+            Assert.isEqual(29, v1.x);
+            Assert.isEqual(27, v1.y);
+            Assert.isEqual(50, v2.x);
+            Assert.isEqual(30, v2.y);
+        },
+
         slerp2: function () {
             var v1 = MathEx.vector2(20, 15);
             var v2 = MathEx.vector2(-10, 30);
