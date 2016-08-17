@@ -12,5 +12,6 @@
 	Test.addScripts("../js/updateloop.js",				"updateloop.tests.js");
 	Test.addScripts("../js/draw.js",					"draw.tests.js");
 	Test.addScripts("../js/fixeddeltaupdater.js",		"fixeddeltaupdater.tests.js");
+	Test.addScripts("../js/math.js",					"math.tests.js");
 
 })();

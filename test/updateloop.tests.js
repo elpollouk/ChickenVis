@@ -106,8 +106,7 @@ window.Tests.UpdateLoopTests = {
 
         for (var i = 0; i < 15; i++) {
             nextFrame();
-            Test.log(`FPS ${i} = ${updater.fps}`);
-            Assert.isTrue(24.5 < updater.fps && updater.fps < 25.5);
+            Assert.isInRange(24.5, 25.5, updater.fps);
         }
     },
 
@@ -123,7 +122,7 @@ window.Tests.UpdateLoopTests = {
         }
 
         Test.log(`FPS ${updater.fps}`);
-        Assert.isTrue(16.5 < updater.fps && updater.fps < 17.5);
+        Assert.isInRange(16.5, 17.5, updater.fps);
     }
 };
 

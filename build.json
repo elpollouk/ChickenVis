@@ -21,6 +21,9 @@
         },
         {
             "path": "js/fixeddeltaupdater.js"
+        },
+        {
+            "path": "js/math.js"
         }
     ]
 }
