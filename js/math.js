@@ -1,11 +1,28 @@
 Chicken.register("ChickenVis.Math", [], function () {
     "use strict";
 
+    var QUARTER_PI = 0.25 * Math.PI;
+    var HALF_PI = 0.5 * Math.PI;
+    var TWO_PI = 2 * Math.PI;
+
     var MathEx = {
         //---------------------------------------------------------------------------------------//
         // Constants
         //---------------------------------------------------------------------------------------//
-        TWO_PI: 2 * Math.PI,
+        QUARTER_PI: QUARTER_PI, // 45deg
+        HALF_PI: HALF_PI,       // 90deg
+        TWO_PI: TWO_PI,         // 360deg
+
+        //---------------------------------------------------------------------------------------//
+        // Conversions
+        //---------------------------------------------------------------------------------------//
+        degreesToRads: function MathEx_degreesToRads(d) {
+            return (d * TWO_PI) / 360;
+        },
+
+        radsToDegrees: function MathEx_radsToDegrees(r) {
+            return (r * 360) / TWO_PI;
+        },
 
         //---------------------------------------------------------------------------------------//
         // Random
@@ -108,6 +125,15 @@ Chicken.register("ChickenVis.Math", [], function () {
                 x: v1.x + ((v2.x - v1.x) * alpha),
                 y: v1.y + ((v2.y - v1.y) * alpha)
             };
+        },
+
+        rotate2: function MathEx_rotate2(v, rads) {
+            var x = v.x;
+            var y = v.y;
+            var c = Math.cos(rads);
+            var s = Math.sin(rads);
+            v.x = (c * x) + (s * y);
+            v.y = (c * y) - (s * x);
         }
     };
 

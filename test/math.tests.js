@@ -17,6 +17,14 @@
         //---------------------------------------------------------------------------------------//
 		// Constants and import tests
 		//---------------------------------------------------------------------------------------//
+        quaterPi: function () {
+            Assert.isEqual(Math.PI / 4, MathEx.QUARTER_PI);
+        },
+
+        halfPi: function () {
+            Assert.isEqual(Math.PI / 2, MathEx.HALF_PI);
+        },
+
         twoPi: function () {
             Assert.isEqual(Math.PI * 2, MathEx.TWO_PI);
         },
@@ -268,5 +276,57 @@
             Assert.isEqual(-6, v3.x);
             Assert.isEqual(-6, v3.y);
         },
+
+        rotate2: function () {
+            var v = MathEx.vector2(0, 1);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(0.7, 0.71, v.x);
+            Assert.isInRange(0.7, 0.71, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(0.99, 1.01, v.x);
+            Assert.isInRange(-0.01, 0.01, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(0.7, 0.71, v.x);
+            Assert.isInRange(-0.71, -0.7, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(-0.01, 0.01, v.x);
+            Assert.isInRange(-1.01, -0.99, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(-0.71, -0.7, v.x);
+            Assert.isInRange(-0.71, -0.7, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(-1.01, -0.99, v.x);
+            Assert.isInRange(-0.01, 0.01, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(-0.71, -0.7, v.x);
+            Assert.isInRange(0.7, 0.71, v.y);
+
+            MathEx.rotate2(v, MathEx.QUARTER_PI);
+            Assert.isInRange(-0.01, 0.01, v.x);
+            Assert.isInRange(0.99, 1.01, v.y);
+        },
+
+        radsToDegrees: function () {
+            Assert.isSame(0, MathEx.radsToDegrees(0));
+            Assert.isSame(45, MathEx.radsToDegrees(MathEx.QUARTER_PI));
+            Assert.isSame(90, MathEx.radsToDegrees(MathEx.HALF_PI));
+            Assert.isSame(180, MathEx.radsToDegrees(MathEx.PI));
+            Assert.isSame(360, MathEx.radsToDegrees(MathEx.TWO_PI));
+        },
+
+        degreesToRads: function () {
+            Assert.isSame(0, MathEx.degreesToRads(0));
+            Assert.isSame(MathEx.QUARTER_PI, MathEx.degreesToRads(45));
+            Assert.isSame(MathEx.HALF_PI, MathEx.degreesToRads(90));
+            Assert.isSame(MathEx.PI, MathEx.degreesToRads(180));
+            Assert.isSame(MathEx.TWO_PI, MathEx.degreesToRads(360));
+        }
     }
 })();
