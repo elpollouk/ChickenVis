@@ -141,6 +141,32 @@
 			q.text("Test", 0, 0);
 		},
 
+		// Transforms
+		newDivLine,
+		function transforms() {
+			var q = new Draw(newContainer)
+			q.save();
+				q.translate(50, 25);
+				q.rotate(Math.PI / 4);
+				q.rect(-15, -15, 30, 30, "rgba(255, 0, 0, 0.5)");
+			q.restore();
+			q.rect(35, 10, 30, 30, "rgba(0, 255, 0, 0.5)");
+		},
+
+		function scaleXY() {
+			var q = new Draw(newContainer)
+			q.translate(50, 25);
+			q.scale(2, 0.5);
+			q.rect(-15, -15, 30, 30, "blue");
+		},
+
+		function scale() {
+			var q = new Draw(newContainer)
+			q.translate(50, 25);
+			q.scale(4);
+			q.rect(-5, -5, 10, 10, "blue");
+		},
+
 		// Clear tests
 		newDivLine,
 		function clear() {
@@ -183,8 +209,9 @@
 				q.imageEx(img,  0, 0, 32, 32, 64, 26, 32, 20);
 				q.imageEx(img, 64, 0, 32, 32,  4,  4, 20, 32);
 			});
-		}/*,
+		}
 
+		/*
 		// Sprite pallette
 		newDivLine,
 		function palletteDraw_dictionary() {

@@ -110,6 +110,26 @@ function (resolveElement) {
 
         clear: function Draw_clear() {
             this._ctx.clearRect(this._originX, this._originY, this._width, this._height);
+        },
+
+        save: function Draw_save() {
+            this._ctx.save();
+        },
+
+        restore: function Draw_restore() {
+            this._ctx.restore();
+        },
+
+        translate: function Draw_translate(x, y) {
+            this._ctx.translate(x, y);
+        },
+
+        rotate: function Draw_rotate(rads) {
+            this._ctx.rotate(rads);
+        },
+
+        scale: function Draw_scale(x, y) {
+            this._ctx.scale(x, y || x);
         }
     }, {
         canvas: {
