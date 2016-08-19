@@ -136,6 +136,28 @@
             Assert.isEqual(44, MathEx.dot2(v1, v2));
         },
 
+        angleBetween2: function () {
+            var v1 = MathEx.vector2(1, 1);
+            var v2 = MathEx.vector2(1, -1);
+            Assert.isEqual(MathEx.HALF_PI, MathEx.angleBetween2(v1, v2));
+
+            v1 = MathEx.vector2(1, 1);
+            v2 = MathEx.vector2(-1, 1);
+            Assert.isEqual(-MathEx.HALF_PI, MathEx.angleBetween2(v1, v2));
+
+            v1 = MathEx.vector2(0, 1);
+            v2 = MathEx.vector2(0, -4);
+            Assert.isEqual(MathEx.PI, MathEx.angleBetween2(v1, v2));
+
+            v1 = MathEx.vector2(12, 0);
+            v2 = MathEx.vector2(0.5, 0);
+            Assert.isEqual(0, MathEx.angleBetween2(v1, v2));
+
+            v1 = MathEx.vector2(-3, -3);
+            v2 = MathEx.vector2(0, -1);
+            Assert.isEqual(-MathEx.QUARTER_PI, MathEx.angleBetween2(v1, v2));
+        },
+
         add2: function () {
             var v1 = MathEx.vector2(2, 3);
             var v2 = MathEx.vector2(4, 5);
