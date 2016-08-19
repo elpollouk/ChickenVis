@@ -4,7 +4,7 @@ function (resolveElement) {
     "use strict";
 
     var DEFAULT_COLOUR    = "black";
-    var DEFAULT_FONT    = "10px Courier";
+    var DEFAULT_FONT      = "10px Courier";
     var TWO_PI            = 2 * Math.PI;
 
     var _supressSelection = function _supressSelection() {
@@ -13,22 +13,27 @@ function (resolveElement) {
 
     var Draw = Chicken.Class(function Draw(container, width, height) {
         container = resolveElement(container);
-        this._width = width || container.clientWidth;
-        this._height = height || container.clientHeight;
         this._originX = 0;
         this._originY = 0;
 
         this._canvas = document.createElement("canvas");
-        this._canvas.setAttribute("width", this._width);
-        this._canvas.setAttribute("height", this._height);
         this._canvas.onselectstart = _supressSelection;
-        container.appendChild(this._canvas);
-
         this._ctx = this._canvas.getContext("2d");
 
-        this._ctx.textBaseline = "top";
+        this.resize(width || container.clientWidth, height || container.clientHeight);
+        container.appendChild(this._canvas);
     },
     {
+        // Resize the canvas
+        resize: function Draw_resize(width, height) {
+            this._width = width;
+            this._height = height;
+            this._canvas.width = this._width;
+            this._canvas.height = this._height;
+            this._ctx.textBaseline = "top";
+            this._ctx.translate(-this._originX, -this._originY);
+        },
+
         setOrigin: function Draw_setOrigin(x, y) {
             // We store the negative of the origin as we use that when clearing and so saves an operation there
             this._originX = -x;

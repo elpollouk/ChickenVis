@@ -209,7 +209,49 @@
 				q.imageEx(img,  0, 0, 32, 32, 64, 26, 32, 20);
 				q.imageEx(img, 64, 0, 32, 32,  4,  4, 20, 32);
 			});
-		}
+		},
+
+		// Resize tests
+		newDivLine,
+		function resize() {
+			var q = new Draw(newContainer);
+			q.rect(10, 10, 80, 30, "rgba(0, 0, 255, 0.5)");
+			q.text("Click to resize", 2, 2);
+			q.canvas.onclick = function () {
+				q.resize(50, 25);
+				q.rect(10, 10, 80, 30, "rgba(0, 0, 255, 0.5)");
+				q.text("Done", 2, 2);
+			}
+		},
+
+		function resizeSetOrigin() {
+			var q = new Draw(newContainer);
+			q.setOrigin(50, 25);
+			q.rect(-50, -25, 50, 25, "rgba(255,   0,   0, 0.5)");
+			q.rect(  0, -25, 50, 25, "rgba(  0, 255,   0, 0.5)");
+			q.rect(-50,   0, 50, 25, "rgba(  0,   0, 255, 0.5)");
+			q.rect(  0,   0, 50, 25, "rgba(255, 255,   0, 0.5)");
+			q.text("Click to resize", -45, -5);
+			q.canvas.onclick = function () {
+				q.resize(150, 75);
+				q.rect(-50, -25, 50, 25, "rgba(255,   0,   0, 0.5)");
+				q.rect(  0, -25, 50, 25, "rgba(  0, 255,   0, 0.5)");
+				q.rect(-50,   0, 50, 25, "rgba(  0,   0, 255, 0.5)");
+				q.rect(  0,   0, 50, 25, "rgba(255, 255,   0, 0.5)");
+				q.text("Done", -12, -5);
+			}
+		},
+
+		function resizeSetOrigin() {
+			var q = new Draw(newContainer);
+			q.resize(200, 100);
+			q.rect(0, 0, 200, 100, "green");
+			q.text("Click to clear", 5, 5);
+			q.canvas.onclick = function () {
+				q.clear();
+			}
+		},
+
 
 		/*
 		// Sprite pallette
