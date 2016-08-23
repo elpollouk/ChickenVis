@@ -64,11 +64,19 @@ Chicken.register("ChickenVis.Math", [], function () {
         },
 
         angleBetween2: function MathEx_angleBetween2(v1, v2) {
-            //var v1p = MathEx.normaliseAndClone2(v1);
-            //var v2p = MathEx.normaliseAndClone2(v2);
-            //var dot = MathEx.dot2(v1p, v2p);
-            //return Math.acos(dot);
             return Math.atan2(v1.y, v1.x) - Math.atan2(v2.y, v2.x);
+        },
+
+        distanceBetween2: function MathEx_distanceBetween2(v1, v2) {
+            var dX = v2.x - v1.x;
+            var dY = v2.y - v1.y;
+            return Math.sqrt((dX * dX) + (dY * dY));
+        },
+
+        distanceBetweenSqrd2: function MathEx_distanceBetween2(v1, v2) {
+            var dX = v2.x - v1.x;
+            var dY = v2.y - v1.y;
+            return (dX * dX) + (dY * dY);
         },
 
         add2: function MathEx_add2(v1, v2) {

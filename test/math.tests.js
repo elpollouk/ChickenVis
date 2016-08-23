@@ -158,6 +158,48 @@
             Assert.isEqual(-MathEx.QUARTER_PI, MathEx.angleBetween2(v1, v2));
         },
 
+        distanceBetween2: function () {
+            var v1, v2;
+
+            v1 = MathEx.vector2(0, 0);
+            v2 = MathEx.vector2(0, 1);
+            Assert.isEqual(1, MathEx.distanceBetween2(v1, v2));
+            Assert.isEqual(1, MathEx.distanceBetween2(v2, v1));
+
+            v1 = MathEx.vector2(1, 0);
+            v2 = MathEx.vector2(1, -5);
+            Assert.isEqual(5, MathEx.distanceBetween2(v1, v2));
+            Assert.isEqual(5, MathEx.distanceBetween2(v2, v1));
+
+            v1 = MathEx.vector2(0, 1.5);
+            v2 = MathEx.vector2(47, 56);
+            MathEx.rotate2(v1, 3.5);
+            MathEx.add2(v1, v2);
+            Assert.isInRange(1.499, 1.501, MathEx.distanceBetween2(v1, v2));
+            Assert.isInRange(1.499, 1.501, MathEx.distanceBetween2(v2, v1));
+        },
+
+        distanceBetweenSqrd2: function () {
+            var v1, v2;
+
+            v1 = MathEx.vector2(0, 0);
+            v2 = MathEx.vector2(0, 1);
+            Assert.isEqual(1, MathEx.distanceBetweenSqrd2(v1, v2));
+            Assert.isEqual(1, MathEx.distanceBetweenSqrd2(v2, v1));
+
+            v1 = MathEx.vector2(1, 0);
+            v2 = MathEx.vector2(1, -5);
+            Assert.isEqual(25, MathEx.distanceBetweenSqrd2(v1, v2));
+            Assert.isEqual(25, MathEx.distanceBetweenSqrd2(v2, v1));
+
+            v1 = MathEx.vector2(0, 1.5);
+            v2 = MathEx.vector2(47, 56);
+            MathEx.rotate2(v1, 3.5);
+            MathEx.add2(v1, v2);
+            Assert.isInRange(2.249, 2.251, MathEx.distanceBetweenSqrd2(v1, v2));
+            Assert.isInRange(2.249, 2.251, MathEx.distanceBetweenSqrd2(v2, v1));
+        },
+
         add2: function () {
             var v1 = MathEx.vector2(2, 3);
             var v2 = MathEx.vector2(4, 5);
