@@ -1,6 +1,6 @@
 {
     "title": "ChickenVis",
-    "version": "0.8.0-dev",
+    "version": "0.9.0-dev",
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "minify": {
         "type": "uglifyjs",
@@ -24,6 +24,9 @@
         },
         {
             "path": "js/math.js"
+        },
+        {
+            "path": "js/spritepallette.js"
         }
     ]
 }

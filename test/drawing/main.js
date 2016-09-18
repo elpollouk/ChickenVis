@@ -4,6 +4,7 @@
 	// Resources
 	var TEST_IMAGE = "123.png";
 	var Draw = Chicken.fetch("ChickenVis.Draw");
+	var SpritePallette = Chicken.fetch("ChickenVis.SpritePallette");
 
 	var _currentDivLine = null;
 
@@ -252,15 +253,13 @@
 			}
 		},
 
-
-		/*
 		// Sprite pallette
 		newDivLine,
 		function palletteDraw_dictionary() {
 			var container = newContainer();
 			var q = new Draw(container);
 			loadImage(TEST_IMAGE, container, function (img) {
-				var p = new Drawing.SpritePallette(img, {
+				var p = new SpritePallette(img, {
 					"one": {
 						x: 0,
 						y: 0,
@@ -283,7 +282,7 @@
 			var container = newContainer();
 			var q = new Draw(container);
 			loadImage(TEST_IMAGE, container, function (img) {
-				var p = new Drawing.SpritePallette(img, [
+				var p = new SpritePallette(img, [
 					{
 						x: 64,
 						y: 0,
@@ -306,7 +305,7 @@
 			var container = newContainer();
 			var q = new Draw(container);
 			loadImage(TEST_IMAGE, container, function (img) {
-				var p = new Drawing.SpritePallette(img, [
+				var p = new SpritePallette(img, [
 					{
 						x: 0,
 						y: 0,
@@ -338,7 +337,7 @@
 					{ id: 1, x:  82, y: 25 },
 				]);
 			});
-		}*/
+		}
 	];
 
 	window.onload = function () {
