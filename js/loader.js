@@ -44,6 +44,7 @@ Chicken.register("ChickenVis.Loader", ["ChickenVis.createElement"], function (cr
         }
     }, {}, {
         TYPE_IMAGE : "img",
+        TYPE_TEXT : "text",
 
         STATE_QUEUED : 0,
         STATE_READY : 1,
@@ -60,10 +61,14 @@ Chicken.register("ChickenVis.Loader", ["ChickenVis.createElement"], function (cr
             typeLoaders[type](asset);
 
             return asset;
+        },
+
+        registerLoader: function Loader_registerLoader(type, loader) {
+            typeLoaders[type] = loader;
         }
     });
 
-    typeLoaders[Loader.TYPE_IMAGE] = function loadImage(asset) {
+    Loader.registerLoader(Loader.TYPE_IMAGE, function loadImage(asset) {
         asset.data = createElement("img");
 
         asset.data.src = asset.source;
@@ -75,7 +80,7 @@ Chicken.register("ChickenVis.Loader", ["ChickenVis.createElement"], function (cr
             asset.state = Loader.STATE_ERROR;
             asset.onStateChange(asset);
         }
-    }
+    });
 
     return Loader;
 });
