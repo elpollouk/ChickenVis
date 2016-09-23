@@ -134,7 +134,7 @@
         diffCtx.putImageData(diffData, 0, 0);
 
         var totalPixels = actualImage.length / 4;
-        if (imageThreshold < failedPixelCount / totalPixels) fail(failedPixelCount + " failed pixels exceeds image threshold of " + imageThreshold);
+        if (imageThreshold < failedPixelCount / totalPixels) fail(failedPixelCount + " (" + (failedPixelCount / totalPixels) + ") failed pixels exceeds image threshold of " + imageThreshold);
     };
 
 
