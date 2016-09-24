@@ -16,12 +16,21 @@ function (resolveElement) {
         this._originX = 0;
         this._originY = 0;
 
-        this._canvas = document.createElement("canvas");
+        if (container.getContext) {
+            // container looks to be a canvas element
+            this._canvas = container;
+        }
+        else {
+            this._canvas = document.createElement("canvas");
+            container.appendChild(this._canvas);
+        }
+
+        width = width || container.width || container.clientWidth;
+        height = height || container.height || container.clientHeight;
+
         this._canvas.onselectstart = _supressSelection;
         this._ctx = this._canvas.getContext("2d");
-
-        this.resize(width || container.clientWidth, height || container.clientHeight);
-        container.appendChild(this._canvas);
+        this.resize(width, height);
     },
     {
         // Resize the canvas
