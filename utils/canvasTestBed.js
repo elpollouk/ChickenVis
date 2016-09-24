@@ -9,8 +9,6 @@
         this._diffCanvas = document.createElement("canvas");
         this._view = -1;
 
-
-
         var canvasContainer = document.createElement("div");
         canvasContainer.style.display = "inline-block";
         canvasContainer.style.padding = "5px";
