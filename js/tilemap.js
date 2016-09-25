@@ -1,4 +1,4 @@
-(function () {
+Chicken.register("ChickenVis.TileMap", [], function () {
 	"use strict";
 
 	var debugViewPort = function TileMap_debugViewPort(ctx, x, y, w, h) {
@@ -8,9 +8,10 @@
 		ctx.stroke();
 	};
 
-	Utils.registerClass("Drawing.TileMap", function TileMap(spec) {
+	var TileMap = Chicken.Class(function TileMap(spec) {
 		// Lets do some checks first
-		if (spec.mapArray.length < (spec.mapWidth * spec.mapHeight)) throw new Error("mapArray is too short for required map size");
+		var expectedLength = (spec.mapWidth * spec.mapHeight);
+		if (spec.mapArray.length < expectedLength) throw new Error("mapArray is too short for required map size. Expected " + expectedLength + ", actual " + spec.mapArray.length);
 
 		this._pallette		= spec.pallette;
 		this._mapWidth		= spec.mapWidth;
@@ -19,8 +20,8 @@
 		this._tileHeight	= spec.tileHeight;
 		this._viewWidth		= spec.viewWidth;
 		this._viewHeight	= spec.viewHeight;
-		this._x				= spec.x;
-		this._y				= spec.y;
+		this._x				= spec.x || 0;
+		this._y				= spec.y || 0;
 		this._map			= spec.mapArray;
 
 		this._maxViewX		= ((spec.mapWidth) * spec.tileWidth) - spec.viewWidth;
@@ -167,5 +168,7 @@
 			},
 			enumerable: true
 		}
-	})
-})();
+	});
+
+	return TileMap;
+});
