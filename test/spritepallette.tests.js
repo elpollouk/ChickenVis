@@ -41,8 +41,6 @@
 		], args);
 	};
 
-	var Draw = Chicken.fetch("ChickenVis.Draw");
-
 	function newCanvas(width, height) {
 		width = width || 100;
 		height = height || 50;
