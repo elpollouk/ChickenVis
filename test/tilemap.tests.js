@@ -65,8 +65,6 @@ function initTestbed(expectedImage, tileSpec, canvasWidth, canvasHeight) {
 
 var testbed;
 
-
-
 window.Tests.TileMapTests = {
     render_fullCanvas: function () {
         var tm = initTestbed(expected_render_fullCanvas.src,

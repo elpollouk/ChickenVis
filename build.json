@@ -30,6 +30,9 @@
         },
         {
             "path": "js/spritepallette.js"
+        },
+        {
+            "path": "js/tilemap.js"
         }
     ]
 }
