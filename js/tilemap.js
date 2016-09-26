@@ -10,6 +10,7 @@ Chicken.register("ChickenVis.TileMap", [], function () {
 
 	var TileMap = Chicken.Class(function TileMap(spec) {
 		// Lets do some checks first
+		if (!spec.pallette) throw new Error("No pallette provided in spec");
 		var expectedLength = (spec.mapWidth * spec.mapHeight);
 		if (spec.mapArray.length < expectedLength) throw new Error("mapArray is too short for required map size. Expected " + expectedLength + ", actual " + spec.mapArray.length);
 
@@ -103,15 +104,15 @@ Chicken.register("ChickenVis.TileMap", [], function () {
 				for (var j = 0; j < viewTileWidth; j++) {
 					if (currentTile >= map.length) break;
 					var id = map[currentTile];
-					if (id === null) continue;
-
-					drawlist[drawListLength++] = {
-						id: id,
-						x: cX,
-						y: cY,
-						w: stepX,
-						h: stepY
-					};
+					if (id !== null) {
+						drawlist[drawListLength++] = {
+							id: id,
+							x: cX,
+							y: cY,
+							w: stepX,
+							h: stepY
+						};
+					}
 					cX += stepX;
 					currentTile++;
 				}
