@@ -17,5 +17,6 @@
 	Test.addScripts("../js/draw.js",					"draw.tests.js");
 	Test.addScripts("../js/spritepallette.js",			"spritepallette.tests.js");
 	Test.addScripts("../js/tilemap.js",					"tilemap.tests.js");
+	Test.addScripts("../js/animatedSprite.js",			"animatedSprite.tests.js");
 
 })();

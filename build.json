@@ -33,6 +33,9 @@
         },
         {
             "path": "js/tilemap.js"
+        },
+        {
+            "path": "js/animatedSprite.js"
         }
     ]
 }
