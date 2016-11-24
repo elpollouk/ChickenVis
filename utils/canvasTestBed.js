@@ -118,7 +118,7 @@
             var db = Math.abs(eb - ab);
             var da = Math.abs(ea - aa);
 
-            diffImage[i] = dg + da;
+            diffImage[i] = dr + da;
             diffImage[i+1] = dg;
             diffImage[i+2] = db;
             diffImage[i+3] = 255;
