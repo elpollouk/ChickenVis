@@ -54,7 +54,7 @@
             verifyDrawCall(calls[0], TestImage, 0, 0, 16, 32);
         },
 
-        render_noUpdates_overriddernRenderSize: function () {
+        render_noUpdates_overriddenRenderSize: function () {
             var s = new AnimatedSprite(TestImage, TestSpec_OverriddenRenderSize);
 
             s.render(MockDraw);

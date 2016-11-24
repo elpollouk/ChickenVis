@@ -13,6 +13,7 @@
 	Test.addScripts("../js/loaders/textLoader.js",		"loaders/textLoader.tests.js");
 	Test.addScripts("../js/updateloop.js",				"updateloop.tests.js");
 	Test.addScripts("../js/fixeddeltaupdater.js",		"fixeddeltaupdater.tests.js");
+	Test.addScripts("../js/fixeddeltawrapper.js",		"fixeddeltawrapper.tests.js");
 	Test.addScripts("../js/math.js",					"math.tests.js");
 	Test.addScripts("../js/draw.js",					"draw.tests.js");
 	Test.addScripts("../js/spritepallette.js",			"spritepallette.tests.js");

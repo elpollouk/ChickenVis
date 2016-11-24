@@ -19,9 +19,10 @@
 			var count = 0;
 
 			var fdu = new FixedDeltaUpdater(function (dt, t) {
-				Assert.isEqual(fixedDt, dt);
-				Assert.isEqual(fdu.currentTime, t);
 				count++;
+				Assert.isEqual(fixedDt, dt);
+				Assert.isEqual(count * fixedDt, t);
+				Assert.isEqual(fdu.currentTime, t);
 			}, fixedDt);
 
 			fdu.update(fixedDt);

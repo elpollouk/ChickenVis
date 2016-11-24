@@ -20,9 +20,9 @@ Chicken.register("ChickenVis.FixedDeltaUpdater", [], function () {
 
 			dt = this._deltaTime; // Save a this reference
 			while (this._accumulator >= dt) {
-				this._onupdate(dt, this._time);
 				this._time += dt;
 				this._accumulator -= dt;
+				this._onupdate(dt, this._time);
 			}
 		}
 	}, {
