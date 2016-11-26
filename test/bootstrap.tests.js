@@ -44,6 +44,7 @@
 			Assert.isEqual(1, mode.onInit.calls.length);
 			Assert.isSame(mode, kernel.currentMode);
 			Assert.isSame(kernel, mode.onInit.calls[0][0]);
+			Assert.isEqual(0, mode.onShutdown.calls.length);
 			Assert.isTrue(kernel.paused);
         },
 
@@ -154,6 +155,7 @@
 			Assert.isSame(kernel, mode1.onShutdown.calls[0][0]);
 			Assert.isEqual(1, mode2.onInit.calls.length);
 			Assert.isSame(kernel, mode2.onInit.calls[0][0]);
+			Assert.isEqual(0, mode2.onShutdown.calls.length);
 		},
 
 		kernel_changeMode_noModeShutdown: function () {
