@@ -1,6 +1,6 @@
 Chicken.register("ChickenVis.Bootstrap",
-["document", "ChickenVis.Draw", "ChickenVis.UpdateLoop"],
-function (document, Draw, UpdateLoop) {
+["document", "ChickenVis.Draw", "ChickenVis.UpdateLoop", "ChickenVis.FixedDeltaWrapper"],
+function (document, Draw, UpdateLoop, FixedDeltaWraper) {
     "use strict";
 
     var Kernel = Chicken.Class(function Kernel(draw, modeHandler) {
@@ -8,10 +8,33 @@ function (document, Draw, UpdateLoop) {
         this.currentMode = modeHandler;
 
         var that = this;
-        this._updateLoop = new UpdateLoop(function Kernel_onUpdate(dt) {
-            var mode = that.currentMode;
-            mode.onUpdate && mode.onUpdate(that, dt);
-            mode.onFrame(that, dt);
+
+        if (modeHandler.onUpdate) {
+            if (modeHandler.updateDelta) {
+                var update = FixedDeltaWraper(function (dt) {
+                    modeHandler.onUpdate(that, dt);
+                }, modeHandler.updateDelta);
+
+                this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                    update(dt);
+                    modeHandler.onFrame(that, dt);
+                };
+            }
+            else {
+                this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                    modeHandler.onUpdate(that, dt);
+                    modeHandler.onFrame(that, dt);
+                };
+            }
+        }
+        else {
+            this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                modeHandler.onFrame(that, dt);
+            };
+        }
+
+        this._updateLoop = new UpdateLoop(function (dt) {
+            that._updateFunc(dt);
         });
 
         modeHandler.onInit(this);

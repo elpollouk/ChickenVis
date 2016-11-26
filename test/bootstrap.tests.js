@@ -103,6 +103,34 @@
 			Assert.isSame(kernel, mode.onUpdate.calls[1][0]);
 			Assert.isEqual(0.017, mode.onUpdate.calls[1][1]);
 			Assert.isEqual(2, requestFrame.calls.length);
+		},
+
+		kernel_logicUpdates_fixedDelta: function () {
+			var requestFrame = mocks["ChickenVis.requestAnimationFrame"];
+			var mode = basicMode();
+			mode.onUpdate = Test.mockFunction();
+			mode.updateDelta = 0.01;
+			var kernel = bootstrap(mode);
+
+			kernel.paused = false;
+			Assert.isEqual(1, mode.onFrame.calls.length);
+			Assert.isSame(kernel, mode.onFrame.calls[0][0]);
+			Assert.isEqual(0.017, mode.onFrame.calls[0][1]);
+			Assert.isEqual(1, mode.onUpdate.calls.length);
+			Assert.isSame(kernel, mode.onUpdate.calls[0][0]);
+			Assert.isEqual(0.01, mode.onUpdate.calls[0][1]);
+			Assert.isEqual(1, requestFrame.calls.length);
+
+			requestFrame.calls[0][0]();
+			Assert.isEqual(2, mode.onFrame.calls.length);
+			Assert.isSame(kernel, mode.onFrame.calls[1][0]);
+			Assert.isEqual(0.017, mode.onFrame.calls[1][1]);
+			Assert.isEqual(3, mode.onUpdate.calls.length);
+			Assert.isSame(kernel, mode.onUpdate.calls[1][0]);
+			Assert.isEqual(0.01, mode.onUpdate.calls[1][1]);
+			Assert.isSame(kernel, mode.onUpdate.calls[2][0]);
+			Assert.isEqual(0.01, mode.onUpdate.calls[2][1]);
+			Assert.isEqual(2, requestFrame.calls.length);
 		}
     };
 })();
