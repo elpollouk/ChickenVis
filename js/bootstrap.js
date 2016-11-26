@@ -8,41 +8,49 @@ function (document, Draw, UpdateLoop, FixedDeltaWraper) {
         this.currentMode = modeHandler;
 
         var that = this;
-
-        if (modeHandler.onUpdate) {
-            if (modeHandler.updateDelta) {
-                var update = FixedDeltaWraper(function (dt) {
-                    modeHandler.onUpdate(that, dt);
-                }, modeHandler.updateDelta);
-
-                this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
-                    update(dt);
-                    modeHandler.onFrame(that, dt);
-                };
-            }
-            else {
-                this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
-                    modeHandler.onUpdate(that, dt);
-                    modeHandler.onFrame(that, dt);
-                };
-            }
-        }
-        else {
-            this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
-                modeHandler.onFrame(that, dt);
-            };
-        }
-
         this._updateLoop = new UpdateLoop(function (dt) {
             that._updateFunc(dt);
         });
-
-        modeHandler.onInit(this);
     }, {
         step: function Kernel_step(dt) {
             this._updateLoop.step(dt);
         }
     }, {
+        currentMode: {
+            get: function Kernel_get_currentMode() {
+                return this._currentMode;
+            },
+            set: function Kernel_set_currentMode(mode) {
+                this._currentMode = mode;
+                var that = this;
+
+                if (mode.onUpdate) {
+                    if (mode.updateDelta) {
+                        var update = FixedDeltaWraper(function (dt) {
+                            mode.onUpdate(that, dt);
+                        }, mode.updateDelta);
+
+                        this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                            update(dt);
+                            mode.onFrame(that, dt);
+                        };
+                    }
+                    else {
+                        this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                            mode.onUpdate(that, dt);
+                            mode.onFrame(that, dt);
+                        };
+                    }
+                }
+                else {
+                    this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
+                        mode.onFrame(that, dt);
+                    };
+                }
+
+                mode.onInit(this);
+            }
+        },
         paused: {
             get: function Kernel_get_Paused() {
                 return this._updateLoop.paused;
