@@ -1,6 +1,6 @@
 Chicken.register("ChickenVis.Bootstrap",
-["document", "ChickenVis.Draw", "ChickenVis.UpdateLoop", "ChickenVis.FixedDeltaWrapper"],
-function (document, Draw, UpdateLoop, FixedDeltaWraper) {
+["window", "document", "ChickenVis.Draw", "ChickenVis.UpdateLoop", "ChickenVis.FixedDeltaWrapper"],
+function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
     "use strict";
 
     var Kernel = Chicken.Class(function Kernel(draw, modeHandler) {
@@ -70,10 +70,19 @@ function (document, Draw, UpdateLoop, FixedDeltaWraper) {
         }
     });
 
-    var bootstrap = function (modeHandler) {
+    var bootstrap = function Bootstrap(modeHandler) {
         var body = document.body;
         var draw = new Draw(body);
-        return new Kernel(draw, modeHandler);
+        body.style.padding = "0";
+        body.style.margin = "0";
+
+        var kernel = new Kernel(draw, modeHandler);
+
+        window.onresize = function Bootstrap_onresize() {
+            kernel.draw.resize(body.clientWidth, body.clientHeight);
+        };
+
+        return kernel;
     };
 
     return bootstrap;

@@ -28,6 +28,8 @@
 		beforeTest: function () {
 			var t = 123;
 			mocks.document.body.appendChild = Test.mockFunction();
+			mocks.document.body.style = {};
+			mocks.window = {};
 			mocks["ChickenVis.requestAnimationFrame"] = Test.mockFunction();
 			mocks["Date.now"] = function () { return t += 17; };
 			bootstrap = Chicken.fetch("ChickenVis.Bootstrap", mocks);
@@ -39,6 +41,9 @@
 
 			Assert.isEqual(640, kernel.draw.canvas.width);
 			Assert.isEqual(480, kernel.draw.canvas.height);
+			Assert.isNotNullOrUndefined(mocks.window.onresize);
+			Assert.isSame("0", mocks.document.body.style.padding);
+			Assert.isSame("0", mocks.document.body.style.margin);
 			Assert.isEqual(1, mocks.document.body.appendChild.calls.length);
 			Assert.isSame(kernel.draw.canvas, mocks.document.body.appendChild.calls[0][0]);
 			Assert.isEqual(1, mode.onInit.calls.length);
@@ -56,6 +61,18 @@
 			Assert.isEqual(1, mocks.document.body.appendChild.calls.length);
 			Assert.isSame(kernel.draw.canvas, mocks.document.body.appendChild.calls[0][0]);
 			Assert.isTrue(kernel.paused);
+		},
+
+		windowResize: function () {
+			var mode = basicMode();
+			var kernel = bootstrap(mode);
+
+			mocks.document.body.clientWidth = 1024;
+			mocks.document.body.clientHeight = 768;
+			mocks.window.onresize();
+
+			Assert.isEqual(1024, kernel.draw.canvas.width);
+			Assert.isEqual(768, kernel.draw.canvas.height);
 		},
 
 		kernel_step: function () {
