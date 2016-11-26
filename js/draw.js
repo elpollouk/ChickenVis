@@ -1,6 +1,6 @@
 Chicken.register("ChickenVis.Draw",
-["ChickenVis.resolveElement"],
-function (resolveElement) {
+["ChickenVis.resolveElement", "document"],
+function (resolveElement, document) {
     "use strict";
 
     var DEFAULT_COLOUR    = "black";
