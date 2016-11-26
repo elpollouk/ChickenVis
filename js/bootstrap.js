@@ -21,6 +21,7 @@ function (document, Draw, UpdateLoop, FixedDeltaWraper) {
                 return this._currentMode;
             },
             set: function Kernel_set_currentMode(mode) {
+                this._currentMode && this._currentMode.onShutdown && this._currentMode.onShutdown(this);
                 this._currentMode = mode;
                 var that = this;
 
@@ -48,7 +49,7 @@ function (document, Draw, UpdateLoop, FixedDeltaWraper) {
                     };
                 }
 
-                mode.onInit(this);
+                mode.onInit && mode.onInit(this);
             }
         },
         paused: {
