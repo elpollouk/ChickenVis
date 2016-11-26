@@ -1,6 +1,6 @@
 {
     "title": "ChickenVis",
-    "version": "0.9.0-dev",
+    "version": "0.10.0-dev",
     "output": "../elpollouk.github.io/libs/ChickenVis.js",
     "minify": {
         "type": "uglifyjs",
