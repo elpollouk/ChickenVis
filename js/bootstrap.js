@@ -23,29 +23,29 @@ function (document, Draw, UpdateLoop, FixedDeltaWraper) {
             set: function Kernel_set_currentMode(mode) {
                 this._currentMode && this._currentMode.onShutdown && this._currentMode.onShutdown(this);
                 this._currentMode = mode;
-                var that = this;
+                var kernel = this;
 
                 if (mode.onUpdate) {
                     if (mode.updateDelta) {
                         var update = FixedDeltaWraper(function (dt) {
-                            mode.onUpdate(that, dt);
+                            mode.onUpdate(kernel, dt);
                         }, mode.updateDelta);
 
                         this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
                             update(dt);
-                            mode.onFrame(that, dt);
+                            mode.onFrame(kernel, dt);
                         };
                     }
                     else {
                         this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
-                            mode.onUpdate(that, dt);
-                            mode.onFrame(that, dt);
+                            mode.onUpdate(kernel, dt);
+                            mode.onFrame(kernel, dt);
                         };
                     }
                 }
                 else {
                     this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
-                        mode.onFrame(that, dt);
+                        mode.onFrame(kernel, dt);
                     };
                 }
 
