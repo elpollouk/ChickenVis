@@ -1,5 +1,5 @@
 Chicken.register("ChickenVis.Draw",
-["ChickenVis.resolveElement", "document"],
+["ChickenFW.resolveElement", "document"],
 function (resolveElement, document) {
     "use strict";
 
