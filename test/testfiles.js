@@ -20,5 +20,6 @@
 	Test.addScripts("../js/tilemap.js",					"tilemap.tests.js");
 	Test.addScripts("../js/animatedSprite.js",			"animatedSprite.tests.js");
 	Test.addScripts("../js/bootstrap.js",				"bootstrap.tests.js");
+	Test.addScripts("../js/actiongroup.js",				"actiongroup.tests.js");
 
 })();
