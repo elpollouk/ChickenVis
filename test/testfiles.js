@@ -3,7 +3,7 @@
 
 	// External libs
 	Test.addScripts(
-		"../../elpollouk.github.io/libs/ChickenFW.js",
+		"https://elpollouk.github.io/libs/ChickenFW.js",
 		"../utils/canvasTestBed.js"
 	);
 
@@ -19,5 +19,6 @@
 	Test.addScripts("../js/spritepallette.js",			"spritepallette.tests.js");
 	Test.addScripts("../js/tilemap.js",					"tilemap.tests.js");
 	Test.addScripts("../js/animatedSprite.js",			"animatedSprite.tests.js");
+	Test.addScripts("../js/bootstrap.js",				"bootstrap.tests.js");
 
 })();
