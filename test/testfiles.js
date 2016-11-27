@@ -3,7 +3,7 @@
 
 	// External libs
 	Test.addScripts(
-		"http://elpollouk.github.io/libs/ChickenFW.js",
+		"../../elpollouk.github.io/libs/ChickenFW.js",
 		"../utils/canvasTestBed.js"
 	);
 

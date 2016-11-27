@@ -3,13 +3,14 @@ Chicken.register("ChickenVis.Bootstrap",
 function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
     "use strict";
 
-    var Kernel = Chicken.Class(function Kernel(draw, modeHandler) {
+    var Kernel = Chicken.Class(function Kernel(draw, mode) {
         this.draw = draw;
-        this.currentMode = modeHandler;
+        this.currentMode = mode;
 
-        var that = this;
+        var kernel = this;
         this._updateLoop = new UpdateLoop(function (dt) {
-            that._updateFunc(dt);
+            // Update func is set in currentMode.set
+            kernel._updateFunc(dt);
         });
     }, {
         step: function Kernel_step(dt) {
@@ -25,8 +26,10 @@ function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
                 this._currentMode = mode;
                 var kernel = this;
 
+                // For efficiency, create an update function that specific the the update requirements of the currentMode
                 if (mode.onUpdate) {
                     if (mode.updateDelta) {
+                        // Update function should fix on a fixed delta interval
                         var update = FixedDeltaWraper(function (dt) {
                             mode.onUpdate(kernel, dt);
                         }, mode.updateDelta);
@@ -37,6 +40,7 @@ function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
                         };
                     }
                     else {
+                        // Update function should fire at same frquency as the frame rate
                         this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
                             mode.onUpdate(kernel, dt);
                             mode.onFrame(kernel, dt);
@@ -44,6 +48,7 @@ function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
                     }
                 }
                 else {
+                    // No specific update function, so only invoke the frame handler
                     this._updateFunc = function Kernel_onUpdateFrameTied(dt) {
                         mode.onFrame(kernel, dt);
                     };
@@ -73,13 +78,18 @@ function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
     var bootstrap = function Bootstrap(modeHandler) {
         var body = document.body;
         var draw = new Draw(body);
+        // Styling on the body to remove any space around the canvas
         body.style.padding = "0";
         body.style.margin = "0";
+        // Style the canvas so that it always fills its parent no matter it's resolution
+        // This avoids problems shrinking the window that causes scroll bars to eat into the
+        // body size causing the canvas to be shrunk too much
         draw.canvas.style.width = "100%";
         draw.canvas.style.height = "100%";
 
         var kernel = new Kernel(draw, modeHandler);
 
+        // Hook in a resize handler so that the canvas always fills the available space
         window.onresize = function Bootstrap_onresize() {
             kernel.draw.resize(body.clientWidth, body.clientHeight);
         };
