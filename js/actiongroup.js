@@ -1,10 +1,10 @@
 Chicken.register("ChickenVis.ActionGroup", [], function () {
 
-	var ActionGroup = Chicken.Class(function (action) {
+	var ActionGroup = Chicken.Class(function ActionGroup(action) {
         this._action = action;
 		this._actors = [];
 	}, {
-		add: function (actors) {
+		add: function ActionGroup_add(actors) {
 			if (!Array.isArray(actors))
 				actors = [ actors ];
 
@@ -17,7 +17,7 @@ Chicken.register("ChickenVis.ActionGroup", [], function () {
             }
 		},
 
-		remove: function (actors) {
+		remove: function ActionGroup_remove(actors) {
 			if (!Array.isArray(actors))
 				actors = [ actors ];
 
@@ -27,11 +27,11 @@ Chicken.register("ChickenVis.ActionGroup", [], function () {
 						this._actors.splice(j, 1);
 		},
 
-		clear: function () {
+		clear: function ActionGroup_clear() {
 			this._actors = [];
 		},
 
-        invoke0: function () {
+        invoke0: function ActionGroup_invoke0() {
             var action = this._action;
             var actors = this._actors;
 
@@ -39,7 +39,7 @@ Chicken.register("ChickenVis.ActionGroup", [], function () {
                 actors[i][action]();
         },
 
-        invoke1: function (a) {
+        invoke1: function ActionGroup_invoke1(a) {
             var action = this._action;
             var actors = this._actors;
 
@@ -47,7 +47,7 @@ Chicken.register("ChickenVis.ActionGroup", [], function () {
                 actors[i][action](a);
         },
 
-        invoke2: function (a, b) {
+        invoke2: function ActionGroup_invoke2(a, b) {
             var action = this._action;
             var actors = this._actors;
 
@@ -57,12 +57,12 @@ Chicken.register("ChickenVis.ActionGroup", [], function () {
 
 	}, {
         action: {
-            get: function () {
+            get: function ActionGroup_action_get() {
                 return this._action;
             }
         },
 		count: {
-            get: function () {
+            get: function ActionGroup_count_get() {
                 return this._actors.length;
             },
             enumerable: true
