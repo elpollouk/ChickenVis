@@ -41,6 +41,8 @@
 
 			Assert.isEqual(640, kernel.draw.canvas.width);
 			Assert.isEqual(480, kernel.draw.canvas.height);
+			Assert.isEqual("100%", kernel.draw.canvas.style.width);
+			Assert.isEqual("100%", kernel.draw.canvas.style.height);
 			Assert.isNotNullOrUndefined(mocks.window.onresize);
 			Assert.isSame("0", mocks.document.body.style.padding);
 			Assert.isSame("0", mocks.document.body.style.margin);

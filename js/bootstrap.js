@@ -75,6 +75,8 @@ function (window, document, Draw, UpdateLoop, FixedDeltaWraper) {
         var draw = new Draw(body);
         body.style.padding = "0";
         body.style.margin = "0";
+        draw.canvas.style.width = "100%";
+        draw.canvas.style.height = "100%";
 
         var kernel = new Kernel(draw, modeHandler);
 
